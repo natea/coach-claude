@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "mcp__coach-claude__check_reminders",
+      "Bash(ruff check:*)",
+      "Bash(black:*)",
+      "Bash(coach-claude-server status:*)",
+      "mcp__coach-claude__update_config",
+      "Bash(grep:*)",
+      "mcp__coach-claude__get_config",
+      "Bash(curl:*)",
+      "Bash(lsof:*)",
+      "Bash(ss:*)",
+      "Bash(netstat:*)",
+      "mcp__coach-claude__log_workout",
+      "mcp__coach-claude__list_recent_workouts",
+      "mcp__coach-claude__delete_workout",
+      "mcp__coach-claude__log_ignored_reminder",
+      "mcp__coach-claude__log_water",
+      "mcp__coach-claude__get_body_part_stats",
+      "mcp__coach-claude__update_workout",
+      "mcp__coach-claude__log_body_weight"
+    ]
+  }
+}

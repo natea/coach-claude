@@ -1,0 +1,50 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Test Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ['3.11', '3.12']
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        cd packages/mcp-server
+        pip install -e ".[dev]"
+
+    - name: Lint with ruff
+      run: |
+        cd packages/mcp-server
+        ruff check src/
+
+    - name: Check formatting with black
+      run: |
+        cd packages/mcp-server
+        black --check src/
+
+    - name: Run tests
+      run: |
+        cd packages/mcp-server
+        pytest
+
+    - name: Verify package builds
+      run: |
+        pip install build
+        cd packages/mcp-server
+        python -m build
