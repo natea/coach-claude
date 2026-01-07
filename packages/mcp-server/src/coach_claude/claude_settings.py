@@ -15,7 +15,17 @@ MCP_NAME = "coach-claude"
 
 
 def get_settings_path() -> Path:
-    """Get the Claude settings file path."""
+    """Get the Claude settings file path.
+
+    Claude Code stores user settings in ~/.claude.json (current location).
+    Falls back to ~/.claude/settings.json for backwards compatibility.
+    """
+    # Current location used by Claude Code
+    current_path = Path.home() / ".claude.json"
+    if current_path.exists():
+        return current_path
+
+    # Legacy location (for backwards compatibility)
     return Path.home() / ".claude" / "settings.json"
 
 
